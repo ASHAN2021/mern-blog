@@ -1,11 +1,17 @@
-/** @type {import('tailwindcss').Config} */
+/* eslint-disable no-undef */
+const flowbite = require("flowbite-react/tailwind");
+  /** @import('tailwindcss').Config */
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    
+    flowbite.content(),
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
-}
+  plugins: [
+    flowbite.plugin(),
+  ],
+};
