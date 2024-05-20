@@ -1,4 +1,3 @@
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -6,14 +5,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "mern-blog-41510.firebaseapp.com",
-  projectId: "mern-blog-41510",
-  storageBucket: "mern-blog-41510.appspot.com",
-  messagingSenderId: "944048657994",
-  appId: "1:944048657994:web:0725703c0c0fc64283b8b3"
+  apiKey: "AIzaSyDcIrYAIYHonqkG-NxzjamOHz0mybyIFkE",
+  authDomain: "mern-blog-2.firebaseapp.com",
+  projectId: "mern-blog-2",
+  storageBucket: "mern-blog-2.appspot.com",
+  messagingSenderId: "86341159423",
+  appId: "1:86341159423:web:1afae64c081a2bc7523fca"
 };
 
 // Initialize Firebase
-// eslint-disable-next-line no-unused-vars
  export const app = initializeApp(firebaseConfig);

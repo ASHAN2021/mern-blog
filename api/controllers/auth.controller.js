@@ -1,5 +1,5 @@
 import User from "../models/user.model.js";
-import bcrypt from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utills/error.js";
 import jwt from "jsonwebtoken";
 
@@ -9,7 +9,7 @@ export const signup = async(req,res,next)=>{
     if(!username|| !email || !password || username==='' || email==='' || password===''){
         next(errorHandler(400,'All field are requrired'));
     }
-    const hashedpassword = bcrypt.hashSync(password,10);
+    const hashedpassword = bcryptjs.hashSync(password,10);
 
     const newUser = new User({
         username,
@@ -35,7 +35,7 @@ export const signin = async(req,res,next)=>{
         if(!validUser){
            return  next(errorHandler(404,'user not found'));
         }
-        const validpassword = bcrypt.compareSync(password,validUser.password);
+        const validpassword = bcryptjs.compareSync(password,validUser.password);
         if(!validpassword){
             return next(errorHandler(400,'invaild password'));
         }
@@ -50,37 +50,36 @@ export const signin = async(req,res,next)=>{
     }
 }
 
-export const google = async (req,res,next)=>{
-    const {email,name,googlePhotoUrl}= req.body;
+export const google = async(req,res,next) =>{
+    const {email, name, googlePhotoUrl} =req.body;
+  
     try {
-        const user =await User.findOne({email});
-    if (user) {
-      const token = jwt.sign({id: user._id, isAdmin:user.isAdmin},process.env.JWT_SECRET);
-      const {password, ...rest} = user._doc;
-      res.status(200).cookie('access_token', token,{
-        httpOnly: true,
-
-      }).json(rest);
-
-    }else{
+      const user =await User.findOne({email});
+      if (user) {
+        const token = jwt.sign({id: user._id, isAdmin:user.isAdmin},process.env.JWT_SECRET);
+        const {password, ...rest} = user._doc;
+        res.status(200).cookie('access_token', token,{
+          httpOnly: true,
+  
+        }).json(rest);
+      }else{
         const generatedPassword = Math.random().toString(36).slice(-8);
-      const hashedpassword = bcrypt.hashSync(generatedPassword, 10);
-      const newUser = new User({
-        username: name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
-        email,
-        password: hashedpassword,
-        profilePicture:googlePhotoUrl,
-      });
-      await newUser.save();
-      const token = jwt.sign({id:newUser._id, isAdmin:newUser.isAdmin}, process.env.JWT_SECRET);
-      const {password, ...rest} = user._doc;
-      res.status(200).cookie('access_token', token,{
-        httpOnly: true,
-
-      }).json(rest);
-
+        const hashedpassword = bcryptjs.hashSync(generatedPassword, 10);
+        const newUser = new User({
+          username: name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
+          email,
+          password: hashedpassword,
+          profilePicture:googlePhotoUrl,
+        });
+        await newUser.save();
+        const token = jwt.sign({id:newUser._id, isAdmin:newUser.isAdmin}, process.env.JWT_SECRET);
+        const {password, ...rest} = user._doc;
+        res.status(200).cookie('access_token', token,{
+          httpOnly: true,
+  
+        }).json(rest);
+      }
+    } catch (error) {
+      next(error)
     }
- }catch (error) {
-        next(error);
-    }
-}
+  }
