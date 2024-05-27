@@ -14,6 +14,8 @@ import UpdatePost from "./pages/UpdatePost";
 import PostPage from "./pages/PostPage";
 import ScrollToTop from "./compoents/ScrollToTop";
 import Search from "./pages/Search";
+import CreateAd from "./pages/CreateAd";
+import UpdateAd from "./pages/UpdateAd";
 
 
 export default function App() {
@@ -34,9 +36,11 @@ export default function App() {
         <Route element={<OnlyAdminPrivateRoute/>}>
                <Route path="/create-post"  element={<CreatePost />}/>
                <Route path='/update-post/:postId' element={<UpdatePost />} />
+               <Route path='/create-Ad' element={<CreateAd />} />
+               <Route path='/update-Ad/:AdId' element={<UpdateAd />} />
         </Route>
         <Route path="/Projects"  element={<Projects/>}/>
-        <Route path="/PostPage"  element={<PostPage/>}/>
+        <Route path="//post/:postSlug"  element={<PostPage/>}/>
 
       </Routes>
       <Footer/>

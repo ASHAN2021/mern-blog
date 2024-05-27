@@ -76,6 +76,15 @@ export default function Dashsidebar() {
                  Comments
                </Sidebar.Item>
              </Link>
+             <Link to='/dashboard?tab=Ads'>
+               <Sidebar.Item
+                 active={tab === 'Ads'}
+                 icon={HiAnnotation}
+                 as='div'
+               >
+                 Ads
+               </Sidebar.Item>
+             </Link>
           </>
             
             

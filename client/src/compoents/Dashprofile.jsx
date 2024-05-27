@@ -234,8 +234,17 @@ export default function Dashprofile() {
             </Button>
           </Link>
         )}
-       
-       
+        {currentUser.isAdmin && (
+            <Link to={'/create-Ad'}>
+              <Button
+                type='button'
+                gradientDuoTone='purpleToPink'
+                className='w-full'
+              >
+                Create a Add
+              </Button>
+            </Link>
+          )}
     </form>
 
     <div className='text-red-500 flex justify-between mt-5'>
