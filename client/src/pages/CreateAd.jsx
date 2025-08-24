@@ -116,7 +116,7 @@ export default function CreatePost() {
           />
         )}
             
-            <Button type='submit' gradientDuoTone='purpleToPink'>Publish </Button>
+            <Button type="submit" gradientDuoTone='purpleToPink'>Publish </Button>
             {AdPublishSuccess && (
         <Alert color='success' className='mt-5'>
           {AdPublishSuccess}

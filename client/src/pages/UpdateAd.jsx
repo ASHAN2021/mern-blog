@@ -15,14 +15,14 @@ export default function UpdateAdd() {
   const [publishError, setPublishError] = useState(null);
   const[postPublishSuccess,setPostPublishSuccess]=useState(null);
  
-  const {addId}= useParams();
+  const {AdId}= useParams();
   //console.log(formData);
   //console.log(addId);
 
   useEffect(()=>{
     try {
-        const fetchAdd = async () => {
-            const res = await fetch(`/api/add/getadds?addId=${addId}`);
+        const fetchAd = async () => {
+            const res = await fetch(`/api/Ad/getAds?AdId=${AdId}`);
             const data = await res.json();
             if (!res.ok) {
               console.log(data.message);
@@ -34,12 +34,12 @@ export default function UpdateAdd() {
               setFormData(data.adds[0]);
             }
          };
-         fetchAdd();
+         fetchAd();
     } catch (error) {
         console.log(error.message);
         
     }
-  },[addId])
+  },[AdId])
   const handleUpdloadImage = async () => {
     try {
       if (!file) {
@@ -82,7 +82,7 @@ export default function UpdateAdd() {
     e.preventDefault();
     setPostPublishSuccess(null);
     try {
-      const res = await fetch(`/api/add/updateadd/${formData._id}`, {
+      const res = await fetch(`/api/Ad/updateAd/${formData._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ export default function UpdateAdd() {
         setPublishError(data.message);
         return;
       }else{
-        setPostPublishSuccess("Add Update successfully");
+        setPostPublishSuccess("Ad Update successfully");
       }
 
      
@@ -104,7 +104,7 @@ export default function UpdateAdd() {
   };
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl my-7 font-semibold'>Update The Add</h1>
+      <h1 className='text-center text-3xl my-7 font-semibold'>Update The Ad</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput

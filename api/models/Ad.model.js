@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Adschema =new  mongoose.Schema(
+const AdSchema =new  mongoose.Schema(
     {
         userId: {
           type: String,
@@ -21,7 +21,7 @@ const Adschema =new  mongoose.Schema(
       { timestamps: true }
 );
 
-const Ad = mongoose.model('Ad',Adschema);
+const Ad = mongoose.model('Ad', AdSchema);
 
 export default Ad;
 

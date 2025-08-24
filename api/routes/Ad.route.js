@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/create' ,verifyToken,create);
 router.get('/getAds',verifyToken, getAds);
-router.delete('/deleteAd/:addId',verifyToken,deleteAd);
-router.put('/updateAd/:addId',verifyToken,updateAd);
+router.delete('/deleteAd/:AdId',verifyToken,deleteAd);
+router.put('/updateAd/:AdId',verifyToken,updateAd);
 
 export default router;

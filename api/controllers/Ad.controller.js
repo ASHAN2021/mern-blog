@@ -1,5 +1,6 @@
-import Ad from "../models/Ad.model";
-import { errorHandler } from "../utills/error";
+import Ad from "../models/Ad.model.js";
+import { errorHandler } from "../utills/error.js";
+
 
 export const create = async (req, res, next)=>{
 
@@ -11,7 +12,7 @@ export const create = async (req, res, next)=>{
         return next(errorHandler(400, 'Please provide all required fields'));
       }  
 
-      const newAdd = new Add({
+      const newAd = new Ad({
         ...req.body,
         
         userId: req.user.id,
@@ -19,9 +20,9 @@ export const create = async (req, res, next)=>{
 
     try {
        
-          await newAdd.save();
+          await newAd.save();
 
-          res.status(200).json(newAdd);
+          res.status(200).json(newAd);
     } catch (error) {
         next(error);
         
@@ -34,7 +35,7 @@ export const getAds =async (req,res,next) =>{
       const limit = parseInt(req.query.limit) || 9;
       const sortDirection = req.query.order === 'asc' ? 1 : -1;
       const Ads = await Ad.find({
-        ...(req.query.AdId && { _Id: req.query.AdId }),
+        ...(req.query.AdId && { _id: req.query.AdId }),
         
       })
         .sort({ createdAt: sortDirection })
@@ -53,7 +54,7 @@ export const getAds =async (req,res,next) =>{
       return next(errorHandler(403, 'You are not allowed to delete this post'));
     }
     try {
-      await Add.findByIdAndDelete(req.params.addId);
+      await Ad.findByIdAndDelete(req.params.addId);
       res.status(200).json('The Add has been deleted');
     } catch (error) {
       next(error);
@@ -67,8 +68,8 @@ export const getAds =async (req,res,next) =>{
   
     try {
   
-      const updatedAd = await Add.findByIdAndUpdate(
-        req.params.addId,
+      const updatedAd = await Ad.findByIdAndUpdate(
+        req.params.AdId,
         {
           $set: {
             title: req.body.title,

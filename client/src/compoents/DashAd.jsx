@@ -5,7 +5,7 @@ import {  Table ,Modal ,Button} from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
-export default function Dashpost() {
+export default function DashAd() {
     const { currentUser } = useSelector((state) => state.user);
     const [userAds, setUserAds] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -67,9 +67,10 @@ export default function Dashpost() {
                 </Table.Head>
                 <Table.Body className='divide-y'>
                   {userAds.map((Ad) => (
+                    
                     <Table.Row key={Ad._id} className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                       <Table.Cell>
-                        {new Date(Ad.createdAt).toLocaleDateString()}
+                        {new Date(Ad.updatedAt).toLocaleDateString()}
                       </Table.Cell>
                       <Table.Cell>
                         <Link >
